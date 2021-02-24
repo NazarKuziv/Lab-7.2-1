@@ -28,46 +28,33 @@ void Print(int** R, const int rowCount, const int colCount)
 	}
 	cout << endl;
 }
-int Sum(int** R, const int rowCount, const int colCount, int S)
-{
-	S = 0;
-	for (int i = 0; i < rowCount; i++)
-		for (int j = 0; j < colCount; j++)
-			if (R[i][j] % 7 == 0 || i % 2 != 0 || j % 2 != 0)
-			{
-				S += R[i][j];
-			}
-	return S;
-}
 
-void SearchMin(int** R, const int rowCount, const int colCount, int* arr)
+void SearchMax(int** R, const int rowCount, const int colCount, int* arr)
 {
-	int min, x = 0;
+	int max, x = 0;
 
 	for (int i = 0; i < rowCount; i++)
 	{
-		min = R[i][0];
+		max = R[i][0];
 		for (int j = 1; j < colCount; j++)
 		{
-			if (R[i][j] < min)
-				min = R[i][j];
+			if (R[i][j] > max)
+				max = R[i][j];
 		}
-		arr[x] = min;
+		arr[x] = max;
 		x++;
 	}
 	
 }
-void PrintMin(int *arr, const int rowCount)
+int SearchMin(int *arr, const int rowCount)
 {
-	int x = 1;
+	int min = arr[0];
 
-	for (int i = 0; i < rowCount; i++)
-	{
-		cout << "  Min Row "<< x <<" = " << arr[i] << endl;
-		cout << endl;
-		x++;
-	}
+	for (int i = 1; i < rowCount; i++)
+		if (arr[i] < min)
+			min = arr[i];
 	
+	return min;
 }
 
 int main()
@@ -92,9 +79,12 @@ int main()
 	cout << endl;
 
 	int* arr = new int[rowCount];
-	SearchMin(R, rowCount, colCount,arr);
-	PrintMin (arr, rowCount);
+	
+	SearchMax(R, rowCount, colCount,arr);
+	int Min = SearchMin(arr, rowCount);
 
+	cout  << "  Min of Max = " << Min << endl;
+ 
 	for (int i = 0; i < rowCount; i++)
 		delete[] R[i];
 	delete[] R;

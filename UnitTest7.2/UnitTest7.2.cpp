@@ -13,14 +13,11 @@ namespace UnitTest72
 		TEST_METHOD(TestMethod1)
 		{
 
-			int a[3][3] = { { 1, 2, 3 },{ 4, 5, 6 },{ 7, 8, 9 } };
-			int* pa[3] = { a[0], a[1], a[2] };
+			int  arr[3] = {3,6,9 };
+			
+			SearchMin(arr, 3);
 
-			int* arr = new int[3];
-
-			SearchMin(pa, 3, 3, arr);
-
-			Assert::AreEqual(arr[0], 1);
+			Assert::AreEqual(arr[0], 3);
 		}
 	};
 }
